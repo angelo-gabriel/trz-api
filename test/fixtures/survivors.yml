@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 33
+  gender: male
+  latitude: 9.99
+  longitude: 9.99
+
+two:
+  name: MyString
+  age: 22
+  gender: female
+  latitude: 9.99
+  longitude: 9.99
