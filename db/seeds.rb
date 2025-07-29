@@ -32,45 +32,34 @@ bob = Survivor.create!(
     longitude: -42.8100
 )
 
-alice_inventory = Inventory.create!(survivor: alice) do
-  puts " Criado inventário para Alice"
-end
-
-bob_inventory = Inventory.create!(survivor: bob) do
-  puts " Criado inventário para Bob"
-end
+alice_inventory = Inventory.create!(survivor: alice)
+bob_inventory = Inventory.create!(survivor: bob)
 
 puts "Sobreviventes e inventários criados com sucesso!"
 
 puts "Criando itens e atribuindo aos inventários..."
 
-Item.create!([
-  {
-    name: "Água Purificada",
-    price: 5,
-    inventory: alice_inventory
-  },
-  {
-    name: "Comida Enlatada",
-    price: 10,
-    inventory: alice_inventory
-  },
-  {
-    name: "Kit de Primeiros Socorros",
-    price: 20,
-    inventory: alice_inventory
-  },
-  {
-    name: "Munição (Caixa)",
-    price: 15,
-    inventory: bob_inventory
-  },
-  {
-    name: "Lanterna",
-    price: 8,
-    inventory: bob_inventory
-  }
-])
+# Itens da Alice
+Item.create!(inventory: alice_inventory, name: "Fiji Water") do |item|
+  item.price = 14
+  item.quantity = 10
+end
+
+Item.create!(inventory: alice_inventory, name: "Campbell Soup") do |item|
+  item.price = 12
+  item.quantity = 5
+end
+
+# Itens do Bob
+Item.create!(inventory: bob_inventory, name: "First Aid Pouch") do |item|
+  item.price = 10
+  item.quantity = 8
+end
+
+Item.create!(inventory: bob_inventory, name: "AK47") do |item|
+  item.price = 8
+  item.quantity = 3
+end
 
 puts "Itens criados com sucesso!"
 puts "Seeds concluídas!"

@@ -31,6 +31,12 @@ class SurvivorsController < ApplicationController
     json_render @survivor
   end
 
+  def update_location
+    survivor = Survivor.find(params.expect(:id))
+    survivor.update!(latitude: params.expect(:latitude), longitude: params.expect(:longitude))
+    render json: { message: "Location updated successfully" }, status: :ok
+  end
+
   def items
     survivor = Survivor.find(params.expect(:id))
 

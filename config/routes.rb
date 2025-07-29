@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :inventories
   resources :survivors do
     member do
+      patch 'update_location', to: 'survivors#update_location'
       get 'items'
     end
   end
