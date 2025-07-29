@@ -5,37 +5,30 @@ class SurvivorsController < ApplicationController
   def index
     @survivors = Survivor.all
 
-    render json: @survivors
+    json_render @survivors
   end
 
   # GET /survivors/1
   def show
-    render json: @survivor
+    json_render @survivor
   end
 
   # POST /survivors
   def create
-    @survivor = Survivor.new(survivor_params)
-
-    if @survivor.save
-      render json: @survivor, status: :created, location: @survivor
-    else
-      render json: @survivor.errors, status: :unprocessable_entity
-    end
+    @survivor = Survivor.create!(survivor_params)
+    json_render @survivor, status: :created
   end
 
   # PATCH/PUT /survivors/1
   def update
-    if @survivor.update(survivor_params)
-      render json: @survivor
-    else
-      render json: @survivor.errors, status: :unprocessable_entity
-    end
+    @survivor.update!(survivor_params)
+    json_render @survivor
   end
 
   # DELETE /survivors/1
   def destroy
     @survivor.destroy!
+    json_render @survivor
   end
 
   private
