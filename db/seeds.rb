@@ -8,16 +8,23 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 #
-puts "Criando sobreviventes..."
 
-survivor1 = Survivor.create!(
+puts "Limpando dados existentes..."
+Item.destroy_all
+Inventory.destroy_all
+Survivor.destroy_all
+puts "Dados limpos."
+
+puts "Criando sobreviventes e seus inventários..."
+
+alice = Survivor.create!(
     name: "Alice Smith",
     age: 30,
     gender: "female",
     latitude: -5.0931,
     longitude: -42.8037
 )
-survivor2 = Survivor.create!(
+bob = Survivor.create!(
     name: "Bob Johnson",
     age: 45,
     gender: "male",
@@ -25,41 +32,45 @@ survivor2 = Survivor.create!(
     longitude: -42.8100
 )
 
-puts "Sobreviventes criados com sucesso!"
+alice_inventory = Inventory.create!(survivor: alice) do
+  puts " Criado inventário para Alice"
+end
 
-puts "Criando inventários..."
-inventory1 = Inventory.create!(survivor: survivor1)
-inventory2 = Inventory.create!(survivor: survivor2)
-puts "Inventários criados com sucesso!"
+bob_inventory = Inventory.create!(survivor: bob) do
+  puts " Criado inventário para Bob"
+end
 
-puts "Criando itens..."
+puts "Sobreviventes e inventários criados com sucesso!"
+
+puts "Criando itens e atribuindo aos inventários..."
 
 Item.create!([
   {
     name: "Água Purificada",
     price: 5,
-    inventory: inventory1
+    inventory: alice_inventory
   },
   {
     name: "Comida Enlatada",
     price: 10,
-    inventory: inventory1
+    inventory: alice_inventory
   },
   {
     name: "Kit de Primeiros Socorros",
     price: 20,
-    inventory: inventory1
+    inventory: alice_inventory
   },
   {
     name: "Munição (Caixa)",
     price: 15,
-    inventory: inventory2
+    inventory: bob_inventory
   },
   {
     name: "Lanterna",
     price: 8,
-    inventory: inventory2
+    inventory: bob_inventory
   }
 ])
 
 puts "Itens criados com sucesso!"
+puts "Seeds concluídas!"

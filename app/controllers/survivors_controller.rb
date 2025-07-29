@@ -31,6 +31,25 @@ class SurvivorsController < ApplicationController
     json_render @survivor
   end
 
+  def items
+    survivor = Survivor.find(params.expect(:id))
+
+    unless survivor
+      render json: { error: "Survivor not found" }, status: :not_found
+      return
+    end
+
+    if survivor.inventory
+      render json: survivor.inventory.items, status: :ok
+    else
+      render json: { error: "No items found for this survivor" }, status: :not_found
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Survivor not found" }, status: :not_found
+  rescue => e
+    render json: { error: "Unexpected error: #{e.message}" }, status: :internal_server_error
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survivor
