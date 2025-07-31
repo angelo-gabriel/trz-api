@@ -25,16 +25,15 @@ class SurvivorTest < ActiveSupport::TestCase
   end
 
   test "should create a survivor with a random gender" do
-    @survivor = create(:survivor)
-    assert @survivor.persisted?
+    survivor = create(:survivor)
+    assert survivor.persisted?
 
-    assert Survivor.genders.keys.map(&:to_s).include?(@survivor.gender.to_s)
+    assert Survivor.genders.keys.map(&:to_s).include?(survivor.gender.to_s)
   end
 
   test "should have an associated inventory" do
-    @survivor = create(:survivor)
-
-    inventory = Inventory.create!(survivor: @survivor)
-    assert_equal inventory, @survivor.inventory
+    survivor = create(:survivor)
+    inventory = create(:inventory, survivor: survivor)
+    assert_equal inventory, survivor.inventory, "Survivor does not have the correct inventory"
   end
 end

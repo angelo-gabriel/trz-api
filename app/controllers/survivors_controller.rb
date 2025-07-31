@@ -28,7 +28,7 @@ class SurvivorsController < ApplicationController
   # DELETE /survivors/1
   def destroy
     @survivor.destroy!
-    json_render @survivor
+    render json: { message: "Survivor deleted successfully" }, status: :no_content
   end
 
   def update_location
@@ -56,6 +56,18 @@ class SurvivorsController < ApplicationController
     render json: { error: "Unexpected error: #{e.message}" }, status: :internal_server_error
   end
 
+  def flag_infected
+    survivor = Survivor.find(params.expect(:id))
+
+    unless survivor
+      render json: { error: "Survivor not found" }, status: :not_found
+      return
+    end
+
+    survivor.update!(infected: true)
+    render json: { message: "Survivor flagged as infected" }, status: :ok
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survivor
@@ -64,6 +76,6 @@ class SurvivorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def survivor_params
-      params.expect(survivor: [ :name, :age, :gender, :latitude, :longitude ])
+      params.expect(survivor: [ :name, :age, :gender, :latitude, :longitude, :infected ])
     end
 end

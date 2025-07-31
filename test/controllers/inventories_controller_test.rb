@@ -2,7 +2,8 @@ require "test_helper"
 
 class InventoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @inventory = inventories(:one)
+    @inventory = create(:inventory)
+    @survivor = @inventory.survivor
   end
 
   test "should get index" do
@@ -11,8 +12,9 @@ class InventoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create inventory" do
+    new_survivor = create(:survivor)
     assert_difference("Inventory.count") do
-      post inventories_url, params: { inventory: { survivor_id: @inventory.survivor_id } }, as: :json
+      post inventories_url, params: { inventory: { survivor_id: new_survivor.id } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +26,8 @@ class InventoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update inventory" do
-    patch inventory_url(@inventory), params: { inventory: { survivor_id: @inventory.survivor_id } }, as: :json
+    new_survivor = create(:survivor)
+    patch inventory_url(@inventory), params: { inventory: { survivor_id: new_survivor.id } }, as: :json
     assert_response :success
   end
 

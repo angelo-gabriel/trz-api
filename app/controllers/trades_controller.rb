@@ -16,6 +16,11 @@ class TradesController < ApplicationController
       return
     end
 
+    if proposer_survivor.infected? || recipient_survivor.infected?
+      render json: { error: "Cannot trade with an infected survivor" }, status: :unprocessable_entity
+      return
+    end
+
     items_to_transfer = { proposer: [], recipient: [] }
     proposer_total_price = 0
     recipient_total_price = 0

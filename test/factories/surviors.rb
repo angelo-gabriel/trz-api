@@ -6,8 +6,10 @@ FactoryBot.define do
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
 
-    after(:create) do |survivor|
-      create(:inventory, survivor: survivor)
+    trait :with_inventory do
+      after(:create) do |survivor|
+        create(:inventory, survivor: survivor)
+      end
     end
   end
 end

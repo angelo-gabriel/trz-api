@@ -2,7 +2,7 @@ require "test_helper"
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @item = items(:one)
+    @item = create(:item)
   end
 
   test "should get index" do
@@ -11,8 +11,11 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create item" do
+    inventory = create(:inventory)
+    item_params = attributes_for(:item).merge(inventory_id: inventory.id)
+
     assert_difference("Item.count") do
-      post items_url, params: { item: { inventory_id: @item.inventory_id, name: @item.name, price: @item.price } }, as: :json
+      post items_url, params: { item: item_params }, as: :json
     end
 
     assert_response :created
@@ -24,7 +27,10 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update item" do
-    patch item_url(@item), params: { item: { inventory_id: @item.inventory_id, name: @item.name, price: @item.price } }, as: :json
+    inventory = create(:inventory)
+    item_params = attributes_for(:item).merge(inventory_id: inventory.id)
+
+    patch item_url(@item), params: { item: item_params }, as: :json
     assert_response :success
   end
 

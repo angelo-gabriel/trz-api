@@ -2,7 +2,7 @@ require "test_helper"
 
 class SurvivorsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @survivor = survivors(:one)
+    @survivor = create(:survivor)
   end
 
   test "should get index" do
@@ -12,7 +12,7 @@ class SurvivorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create survivor" do
     assert_difference("Survivor.count", 1) do
-      post survivors_url, params: { survivor: { age: @survivor.age, gender: @survivor.gender, latitude: @survivor.latitude, longitude: @survivor.longitude, name: @survivor.name } }, as: :json
+      post survivors_url, params: { survivor: { age: @survivor.age, gender: @survivor.gender, latitude: @survivor.latitude, longitude: @survivor.longitude, name: @survivor.name, infected: @survivor.infected } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class SurvivorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update survivor" do
-    patch survivor_url(@survivor), params: { survivor: { age: @survivor.age, gender: @survivor.gender, latitude: @survivor.latitude, longitude: @survivor.longitude, name: @survivor.name } }, as: :json
+    patch survivor_url(@survivor), params: { survivor: { age: @survivor.age, gender: @survivor.gender, latitude: @survivor.latitude, longitude: @survivor.longitude, name: @survivor.name, infected: @survivor.infected } }, as: :json
     assert_response :success
   end
 

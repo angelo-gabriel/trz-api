@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :item do
     sequence(:name) { |n| "Item #{n} #{Faker::Commerce.product_name}" }
     price { [10, 20, 30, 40].sample }
+    quantity { rand(1..10) }
     association :inventory
   end
 
