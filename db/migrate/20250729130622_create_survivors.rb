@@ -3,7 +3,7 @@ class CreateSurvivors < ActiveRecord::Migration[8.0]
     create_table :survivors do |t|
       t.string :name
       t.integer :age
-      t.string :gender
+      t.integer:gender
       t.decimal :latitude
       t.decimal :longitude
 

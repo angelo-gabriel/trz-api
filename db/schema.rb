@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_29_223208) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_31_135407) do
   create_table "inventories", force: :cascade do |t|
     t.integer "survivor_id", null: false
     t.datetime "created_at", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_223208) do
   create_table "survivors", force: :cascade do |t|
     t.string "name"
     t.integer "age"
-    t.string "gender"
+    t.integer "gender"
     t.decimal "latitude"
     t.decimal "longitude"
     t.datetime "created_at", null: false

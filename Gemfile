@@ -46,4 +46,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "simplecov", require: false
+  gem "factory_bot_rails"
+  gem "faker"
 end

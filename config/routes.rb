@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  post 'trade_items', to: 'trades#perform_trade'
+  post 'trade_items', to: 'trades#perform_trade', as: 'perform_trade'
 end

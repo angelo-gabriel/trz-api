@@ -4,7 +4,8 @@ class Survivor < ApplicationRecord
 
   validates :name, presence: true
   validates :age, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :gender, presence: true, inclusion: { in: %w[male female], message: "%{value} is not a valid gender" }
+  enum :gender, { male: 0, female: 1 }
+  validates :gender, presence: true
   validates :latitude, presence: true, numericality: true
   validates :longitude, presence: true, numericality: true
 end

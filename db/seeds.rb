@@ -20,14 +20,14 @@ puts "Criando sobreviventes e seus inventários..."
 alice = Survivor.create!(
     name: "Alice Smith",
     age: 30,
-    gender: "female",
+    gender: :female,
     latitude: -5.0931,
     longitude: -42.8037
 )
 bob = Survivor.create!(
     name: "Bob Johnson",
     age: 45,
-    gender: "male",
+    gender: :male,
     latitude: -5.0850,
     longitude: -42.8100
 )

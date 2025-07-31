@@ -65,6 +65,7 @@ class TradesController < ApplicationController
         proposer_item.save!
 
         recipient_item_entry = recipient_inventory.items.find_or_initialize_by(name: proposer_item.name)
+        recipient_item_entry.quantity ||= 0
         recipient_item_entry.price ||= proposer_item.price
         recipient_item_entry.quantity += quantity_to_move
         recipient_item_entry.save!
@@ -79,7 +80,8 @@ class TradesController < ApplicationController
         recipient_item.quantity -= quantity_to_move
         recipient_item.save!
 
-        proposer_item_entry= recipient_inventory.items.find_or_initialize_by(name: recipient_item.name)
+        proposer_item_entry= proposer_inventory.items.find_or_initialize_by(name: recipient_item.name)
+        proposer_item_entry.quantity ||= 0
         proposer_item_entry.price ||= recipient_item.price
         proposer_item_entry.quantity += quantity_to_move
         proposer_item_entry.save!
